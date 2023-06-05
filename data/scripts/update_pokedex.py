@@ -5,11 +5,11 @@ import json
 data = requests.get(
     "https://raw.githubusercontent.com/smogon/pokemon-showdown/master/data/pokedex.ts"
 ).text
-
+# get rid of beginning Typescript object definitions
 data = data.split("= {")
 assert len(data) == 2, f"expecting data to have length=2: {[i[:50] for i in data]}"
 data = "{" + data[1]
-
+# Get rid of tabs
 data = data.replace("\t", " ")
 
 data = re.sub(r" +//.+", "", data)
